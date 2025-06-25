@@ -7,10 +7,13 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne
 } from 'typeorm';
 import { ProductImage } from '../product-image/product-image.entity';
 import { CartItem } from '../cart-item/cart-item.entity';
-import { OrderItem } from '../orders/order-item.entity';
+import { OrderItem } from '../orders/entities/order-item.entity';
+import { ProductCategory } from 'src/product-category/product-category.entity';
+import { Stock } from 'src/stock/stock.entity';
 
 @Entity('products')
 export class Product {
@@ -53,4 +56,10 @@ export class Product {
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   order_items: OrderItem[];
+
+  @OneToMany(() => ProductCategory, pc => pc.product, { cascade: true })
+  product_categories: ProductCategory[];
+
+  @OneToOne(() => Stock, stock => stock.product)
+  stock: Stock;
 }

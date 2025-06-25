@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { CartItem } from '../cart-item/cart-item.entity';
-import { Order } from '../orders/order.entity';
+import { Order } from '../orders/entities/orders.entity';
 
 @Entity('users')
 export class User {

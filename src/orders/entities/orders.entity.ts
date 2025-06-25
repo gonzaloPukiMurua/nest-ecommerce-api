@@ -1,0 +1,38 @@
+/* eslint-disable prettier/prettier */
+// src/orders/order.entity.ts
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { User } from '../../users/users.entity';
+import { OrderItem } from './order-item.entity';
+
+@Entity('orders')
+export class Order {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'decimal' })
+  total: number;
+
+  @Column()
+  status: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  // Relaciones
+  @ManyToOne(() => User, (user) => user.orders, { onDelete: 'CASCADE' })
+  user: User;
+
+  @OneToMany(() => OrderItem, (item) => item.order, { cascade: true })
+  order_items: OrderItem[];
+}
