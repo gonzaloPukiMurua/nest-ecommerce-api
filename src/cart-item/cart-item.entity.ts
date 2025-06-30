@@ -19,6 +19,9 @@ export class CartItem {
   @Column({ type: 'decimal' })
   quantity: number;
 
+  @Column({ default: true })
+  active: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { User } from '../../users/users.entity';
 import { OrderItem } from './order-item.entity';
+import { Client } from 'src/clients/clients.entity';
 
 @Entity('orders')
 export class Order {
@@ -22,6 +23,9 @@ export class Order {
 
   @Column()
   status: string;
+
+  @Column({ default: true })
+  active: boolean;
 
   @CreateDateColumn()
   created_at: Date;
@@ -35,4 +39,7 @@ export class Order {
 
   @OneToMany(() => OrderItem, (item) => item.order, { cascade: true })
   order_items: OrderItem[];
+
+  @ManyToOne(() => Client, (client) => client.orders, { nullable: true})
+  client: Client;
 }

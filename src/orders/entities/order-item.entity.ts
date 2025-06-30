@@ -18,6 +18,9 @@ export class OrderItem {
   @Column({ type: 'decimal' })
   subtotal: number;
 
+  @Column({ default: true })
+  active: boolean;
+
   // Relaciones
   @ManyToOne(() => Order, (order) => order.order_items, { onDelete: 'CASCADE' })
   order: Order;

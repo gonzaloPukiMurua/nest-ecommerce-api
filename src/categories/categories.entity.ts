@@ -21,6 +21,9 @@ export class Category {
   @Column({ nullable: true })
   description: string;
 
+  @Column({ default: true })
+  active: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 

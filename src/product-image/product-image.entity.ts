@@ -20,6 +20,9 @@ export class ProductImage {
   @Column({ default: false })
   is_primary: boolean;
 
+  @Column({ default: true })
+  active: boolean;
+
   // Relaciones
   @ManyToOne(() => Product, (product) => product.images, {
     onDelete: 'CASCADE',

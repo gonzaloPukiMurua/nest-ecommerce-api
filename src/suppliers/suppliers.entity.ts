@@ -1,38 +1,39 @@
 /* eslint-disable prettier/prettier */
-// src/users/user.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { CartItem } from '../cart-item/cart-item.entity';
-import { Order } from '../orders/entities/orders.entity';
+import { Product } from '../products/products.entity';
 import { Address } from 'src/adresses/adresses.entity';
 
-@Entity('users')
-export class User {
+@Entity('suppliers')
+export class Supplier {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   name: string;
 
-  @Column({ unique: true })
-  email: string;
-
-  @Column()
-  password: string;
+  @Column({ nullable: true })
+  contact_name: string;
 
   @Column({ nullable: true })
-  profile_picture: string;
+  contact_email: string;
 
-  @Column({ default: 'customer' })
-  role: string;
+  @Column({ nullable: true })
+  contact_phone: string;
+
+  @Column({ nullable: true })
+  tax_id: string; // CUIT, RUC, etc.
+
+  @Column({ type: 'numeric', nullable: true })
+  discount_rate: number; // Ej: 10.5 para 10.5%
 
   @Column({ default: true })
   active: boolean;
@@ -43,12 +44,9 @@ export class User {
   @UpdateDateColumn()
   updated_at: Date;
 
-  // Relaciones
-  @OneToMany(() => CartItem, (cartItem) => cartItem.user)
-  cart_items: CartItem[];
-
-  @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
+  // Relación con productos (opcional, si querés mantener trazabilidad)
+  @OneToMany(() => Product, (product) => product.supplier)
+  products: Product[];
 
   @OneToOne(() => Address, { cascade: true, nullable: true})
   @JoinColumn()

@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne
@@ -14,6 +15,7 @@ import { CartItem } from '../cart-item/cart-item.entity';
 import { OrderItem } from '../orders/entities/order-item.entity';
 import { ProductCategory } from 'src/product-category/product-category.entity';
 import { Stock } from 'src/stock/stock.entity';
+import { Supplier } from 'src/suppliers/suppliers.entity';
 
 @Entity('products')
 export class Product {
@@ -41,6 +43,9 @@ export class Product {
   @Column({ type: 'decimal' })
   sale_price: number;
 
+  @Column({ default: true })
+  active: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -62,4 +67,8 @@ export class Product {
 
   @OneToOne(() => Stock, stock => stock.product)
   stock: Stock;
+
+  @ManyToOne(() => Supplier, (supplier) => supplier.products, { nullable: true })
+  supplier: Supplier;
+
 }

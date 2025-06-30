@@ -12,6 +12,10 @@ import { ProductImageModule } from './product-image/product-image.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductCategoryModule } from './product-category/product-category.module';
 import { StockModule } from './stock/stock.module';
+import { AuthModule } from './auth/auth.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
+import { AdressesModule } from './adresses/adresses.module';
+import { ClientsModule } from './clients/clients.module';
 
 @Module({
   imports: [
@@ -34,6 +38,10 @@ import { StockModule } from './stock/stock.module';
     CategoriesModule,
     ProductCategoryModule,
     StockModule,
+    AuthModule,
+    SuppliersModule,
+    AdressesModule,
+    ClientsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

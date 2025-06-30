@@ -15,8 +15,11 @@ export class Stock {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'decimal' })
+  @Column({ type: 'decimal', default: 0 })
   quantity: number;
+
+  @Column({ default: true })
+  active: boolean;
 
   @UpdateDateColumn()
   updated_at: Date;
