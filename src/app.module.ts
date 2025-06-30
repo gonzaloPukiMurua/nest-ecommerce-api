@@ -16,6 +16,8 @@ import { AuthModule } from './auth/auth.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
 import { AdressesModule } from './adresses/adresses.module';
 import { ClientsModule } from './clients/clients.module';
+import { PaymentsModule } from './payments/payments.module';
+import { MailsModule } from './mails/mails.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { ClientsModule } from './clients/clients.module';
     SuppliersModule,
     AdressesModule,
     ClientsModule,
+    PaymentsModule,
+    MailsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

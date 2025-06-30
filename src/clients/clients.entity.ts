@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { Order } from '../orders/entities/orders.entity';
 import { Address } from 'src/adresses/adresses.entity';
+import { Payment } from 'src/payments/payments.entity';
 
 @Entity('clients')
 export class Client {
@@ -48,4 +49,7 @@ export class Client {
   @OneToOne(() => Address, { cascade: true, nullable: true})
   @JoinColumn()
   address: Address;
+
+  @OneToMany(() => Payment, (payment) => payment.client)
+  payments: Payment[];
 }

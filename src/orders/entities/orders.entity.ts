@@ -12,6 +12,7 @@ import {
 import { User } from '../../users/users.entity';
 import { OrderItem } from './order-item.entity';
 import { Client } from 'src/clients/clients.entity';
+import { Payment } from 'src/payments/payments.entity';
 
 @Entity('orders')
 export class Order {
@@ -42,4 +43,7 @@ export class Order {
 
   @ManyToOne(() => Client, (client) => client.orders, { nullable: true})
   client: Client;
+
+  @OneToMany(() => Payment, (payment) => payment.order)
+  payments: Payment[];
 }
