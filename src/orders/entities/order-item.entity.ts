@@ -15,6 +15,9 @@ export class OrderItem {
   @Column({ type: 'decimal' })
   unit_price: number;
 
+  @Column({ type: 'decimal', default: 0})
+  discount: number;
+
   @Column({ type: 'decimal' })
   subtotal: number;
 

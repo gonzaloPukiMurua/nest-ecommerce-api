@@ -23,7 +23,7 @@ export class ProductCategory {
   product: Product;
 
   @Column({ default: true })
-    active: boolean;
+  active: boolean;
 
   @ManyToOne(() => Category, (category) => category.product_categories, {
     onDelete: 'CASCADE',

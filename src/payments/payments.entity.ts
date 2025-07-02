@@ -54,4 +54,7 @@ export class Payment {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @Column({ default: true })
+  active: boolean;
 }

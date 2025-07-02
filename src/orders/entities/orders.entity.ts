@@ -19,11 +19,20 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ type: 'decimal', default: 0})
+  general_discount: number;
+
+  @Column({ type: 'decimal', default: 0})
+  general_surcharge: number;
+
   @Column({ type: 'decimal' })
   total: number;
 
   @Column()
   status: string;
+
+  @Column()
+  is_draft: boolean;
 
   @Column({ default: true })
   active: boolean;
