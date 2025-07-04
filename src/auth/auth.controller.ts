@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Req, Get, UseGuards, Post } from '@nestjs/common';
+import { Controller, Req, Get, UseGuards, Post, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { LoginUserDto } from 'src/users/dto/login-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -22,7 +24,12 @@ export class AuthController {
     }
 
     @Post('register')
-    async register(){
-        return await this.authService.register;
+    async register(@Body() userData: CreateUserDto){
+        return this.authService.register(userData);
+    }
+
+    @Post('login')
+    async login(@Body() userData: LoginUserDto){
+        return this.authService.login(userData);
     }
 }

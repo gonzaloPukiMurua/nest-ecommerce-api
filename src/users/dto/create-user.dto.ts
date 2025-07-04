@@ -51,6 +51,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
 
+  @IsString()
+  @IsNotEmpty()
+  confirm_password: string;
+
   @IsOptional()
   @IsString()
   profile_picture?: string;
