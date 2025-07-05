@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
+
 // src/users/user.entity.ts
+
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -17,40 +19,39 @@ import { Address } from 'src/adresses/adresses.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column({ unique: true })
-  email: string;
+  email!: string;
 
   @Column()
-  password: string;
+  password!: string;
 
   @Column({ nullable: true })
-  profile_picture: string;
+  profile_picture?: string;
 
   @Column({ default: 'customer' })
-  role: string;
+  role!: string;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
-  // Relaciones
   @OneToMany(() => CartItem, (cartItem) => cartItem.user)
-  cart_items: CartItem[];
+  cart_items!: CartItem[];
 
   @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
+  orders!: Order[];
 
-  @OneToOne(() => Address, { cascade: true, nullable: true})
+  @OneToOne(() => Address, { cascade: true, nullable: true })
   @JoinColumn()
-  address: Address;
+  address?: Address;
 }

@@ -12,7 +12,7 @@ export class UserRepository {
         private readonly userRepository: Repository<User>
     ){}
     async findByEmail(email: string): Promise<User | null>{
-        return this.userRepository.findOne({ where: { email } });
+        return await this.userRepository.findOne({ where: { email } });
     }
 
     async create(userData: Partial<CreateUserDto>): Promise<User>{
