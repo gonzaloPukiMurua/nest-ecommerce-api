@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { UsersService } from 'src/users/users.service';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { GoogleUserPayload } from './interfaces/google.interface';
 
 @Injectable()
 export class AuthService {
@@ -17,11 +18,43 @@ export class AuthService {
     ){}
 
     async validateUser(email: string, password: string): Promise<User | null>{
-        const user = await this.userRepository.findByEmail(email);
+        const user = await this.userService.findByEmail(email);
         if( user && await bcrypt.compare(password, user.password)){
             return user;
         }
         return null;
+    }
+
+    getToken(payload: { sub: number, email: string, role: string}){
+
+        if (!this.jwtService) {
+            throw new UnauthorizedException('JwtService no está disponible');
+        }
+
+        return this.jwtService.sign(payload)
+    }
+
+    async validateOrCreateUserFromGoogle(profile: GoogleUserPayload): Promise<User>
+    {
+        const { email, firstName, lastName, picture } = profile;
+
+        let user = await this.userService.findByEmail(profile.email);
+        if(!user){
+            const randomPassword = Math.random().toString(36).slice(-8);
+            const hashedPassword = await bcrypt.hash(randomPassword, 10);
+
+            const newUser = {
+                email,
+                name: `${firstName} ${lastName}`.trim(),
+                password: hashedPassword,
+                profile_picture: picture,
+                role: 'user',
+            };
+
+            user = await this.userService.register(newUser as CreateUserDto);
+        }
+
+        return user;
     }
 
     async register(userData: CreateUserDto): Promise<User>{
@@ -40,7 +73,8 @@ export class AuthService {
     }
 
     async login(userData: LoginUserDto): Promise<{ access_token: string }>{
-        const user = await this.userRepository.findByEmail(userData.email);
+        const user = await this.userService.findByEmail(userData.email);
+        
         if(!user){
             throw new UnauthorizedException('Usuario no existe');
         }
@@ -50,12 +84,8 @@ export class AuthService {
         if(!isPasswordValid){
             throw new UnauthorizedException('Contraseña incorrecta');
         }
-        
-        const payload = { sub: user.id, email: user.email, role: user.role};
-        if (!this.jwtService) {
-            throw new UnauthorizedException('JwtService no está disponible');
-        }
-        const access_token = this.jwtService.sign(payload);
+
+        const access_token = this.getToken({ sub: user.id, email: user.email, role: user.role});
 
         if(!access_token){
              throw new UnauthorizedException('No se pudo generar el token de acceso');

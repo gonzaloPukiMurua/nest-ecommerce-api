@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import { Request } from 'express';
+import { User } from 'src/users/users.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -18,9 +19,13 @@ export class AuthController {
     @Get('google/redirect')
     @UseGuards(AuthGuard('google'))
     googleAuthRedirect(@Req() req: Request){
+        const user = req.user as User;
+        const payload = { sub: user.id, email: user.email, role: user.role };
+        const access_token = this.authService.getToken(payload)
         return {
             message: 'user authenticated via Google',
-            user: req.user,
+            access_token,
+            user,
         };
     }
 
