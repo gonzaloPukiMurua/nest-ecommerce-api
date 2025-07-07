@@ -20,55 +20,55 @@ import { Supplier } from 'src/suppliers/suppliers.entity';
 @Entity('products')
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  internal_code: string;
+  internal_code!: string;
 
   @Column()
-  sku: string;
+  sku!: string;
 
   @Column({ nullable: true })
-  description: string;
+  description!: string;
 
   @Column({ type: 'decimal' })
-  cost: number;
+  cost!: number;
 
   @Column({ type: 'decimal' })
-  margin: number;
+  margin!: number;
 
   @Column({ type: 'decimal' })
-  sale_price: number;
+  sale_price!: number;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   // Relaciones
   @OneToMany(() => ProductImage, (image) => image.product)
-  images: ProductImage[];
+  images!: ProductImage[];
 
   @OneToMany(() => CartItem, (cartItem) => cartItem.product)
-  cart_items: CartItem[];
+  cart_items!: CartItem[];
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
-  order_items: OrderItem[];
+  order_items!: OrderItem[];
 
   @OneToMany(() => ProductCategory, pc => pc.product, { cascade: true })
-  product_categories: ProductCategory[];
+  product_categories!: ProductCategory[];
 
   @OneToOne(() => Stock, stock => stock.product)
-  stock: Stock;
+  stock!: Stock;
 
   @ManyToOne(() => Supplier, (supplier) => supplier.products, { nullable: true })
-  supplier: Supplier;
+  supplier!: Supplier;
 
 }

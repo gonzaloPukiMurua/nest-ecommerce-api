@@ -13,24 +13,24 @@ import { ProductCategory } from '../product-category/product-category.entity';
 @Entity('categories')
 export class Category {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ unique: true })
-  name: string;
+  name!: string;
 
   @Column({ nullable: true })
-  description: string;
+  description!: string | null;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   // Relaciones
   @OneToMany(() => ProductCategory, (pc) => pc.category, { cascade: true })
-  product_categories: ProductCategory[];
+  product_categories!: ProductCategory[];
 }

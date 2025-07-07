@@ -14,47 +14,47 @@ import { PaymentMethod, PaymentStatus } from './payments.enum';
 @Entity('payments')
 export class Payment {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @ManyToOne(() => Order, (order) => order.payments, {
     nullable: false,
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'order_id' })
-  order: Order;
+  order!: Order;
 
   @ManyToOne(() => Client, (client) => client.payments, {
     nullable: true,
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'client_id' })
-  client: Client;
+  client!: Client | null;
 
   @Column({
     type: 'enum',
     enum: PaymentMethod,
   })
-  method: PaymentMethod;
+  method!: PaymentMethod;
 
   @Column({ type: 'numeric' })
-  amount: number;
+  amount!: number;
 
   @Column({
     type: 'enum',
     enum: PaymentStatus,
     default: PaymentStatus.PENDING,
   })
-  status: PaymentStatus;
+  status!: PaymentStatus;
 
   @Column({ nullable: true })
-  transaction_reference: string;
+  transaction_reference!: string | null;
 
   @Column({ type: 'timestamp', nullable: true })
-  paid_at: Date;
+  paid_at!: Date | null;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 }

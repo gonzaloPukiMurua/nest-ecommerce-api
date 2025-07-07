@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { BadRequestException, Body, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserRepository } from '../users/users.repository';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/users.entity';
 import * as bcrypt from 'bcrypt';
@@ -12,7 +11,6 @@ import { GoogleUserPayload } from './interfaces/google.interface';
 @Injectable()
 export class AuthService {
     constructor(
-        private readonly userRepository: UserRepository,
         private readonly userService: UsersService,
         private readonly jwtService: JwtService
     ){}

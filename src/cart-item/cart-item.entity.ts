@@ -14,26 +14,26 @@ import { Product } from '../products/products.entity';
 @Entity('cart_item')
 export class CartItem {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'decimal' })
-  quantity: number;
+  quantity!: number;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   // Relaciones
   @ManyToOne(() => User, (user) => user.cart_items, { onDelete: 'CASCADE' })
-  user: User;
+  user!: User;
 
   @ManyToOne(() => Product, (product) => product.cart_items, {
     onDelete: 'CASCADE',
   })
-  product: Product;
+  product!: Product;
 }

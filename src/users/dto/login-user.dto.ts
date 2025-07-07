@@ -10,10 +10,10 @@ import {
 export class LoginUserDto {
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  password!: string;
 
 }

@@ -13,19 +13,19 @@ import { Product } from '../products/products.entity';
 @Entity('stock')
 export class Stock {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'decimal', default: 0 })
-  quantity: number;
+  quantity!: number;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   // Relaciones
   @OneToOne(() => Product, (product) => product.stock, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'product_id' }) // clave FK explícita
-  product: Product;
+  product!: Product;
 }

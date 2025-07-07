@@ -6,26 +6,26 @@ import { Product } from '../products/products.entity';
 @Entity('product_image')
 export class ProductImage {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  url: string;
+  url!: string;
 
   @Column({ nullable: true })
-  alt_text: string;
+  alt_text?: string;
 
   @Column()
-  position: number;
+  position!: number;
 
   @Column({ default: false })
-  is_primary: boolean;
+  is_primary!: boolean;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   // Relaciones
   @ManyToOne(() => Product, (product) => product.images, {
     onDelete: 'CASCADE',
   })
-  product: Product;
+  product!: Product;
 }

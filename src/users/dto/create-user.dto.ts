@@ -20,19 +20,19 @@ enum UserRole {
 
 class AddressDto {
   @IsString()
-  street: string;
+  street!: string;
 
   @IsString()
-  city: string;
+  city!: string;
 
   @IsString()
-  province: string;
+  province!: string;
 
   @IsString()
-  postalCode: string;
+  postalCode!: string;
 
   @IsString()
-  country: string;
+  country!: string;
 
   @IsBoolean()
   @IsOptional()
@@ -42,18 +42,18 @@ class AddressDto {
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  password!: string;
 
   @IsString()
   @IsNotEmpty()
-  confirm_password: string;
+  confirm_password!: string;
 
   @IsOptional()
   @IsString()

@@ -9,28 +9,30 @@ import {
 @Entity('adresses')
 export class Address {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  street: string;
+  street!: string;
 
   @Column()
-  city: string;
+  city!: string;
 
   @Column()
-  province: string;
+  province!: string;
 
   @Column()
-  postalCode: string;
+  postalCode!: string;
 
   @Column()
-  country: string;
+  country!: string;
 
   @Column({ default: false })
-  isPrimary: boolean;
+  isPrimary!: boolean;
 
-  @Column({ type: 'enum', enum: ['billing', 'shipping', 'fiscal'], default: 'billing'})
-  address_type: 'billing' | 'shipping' | 'fiscal';
-
-  // Relaciones (opcional, según cómo decidas)
+  @Column({
+    type: 'enum',
+    enum: ['billing', 'shipping', 'fiscal'],
+    default: 'billing',
+  })
+  address_type!: 'billing' | 'shipping' | 'fiscal';
 }

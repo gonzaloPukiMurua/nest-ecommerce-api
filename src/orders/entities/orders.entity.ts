@@ -17,42 +17,42 @@ import { Payment } from 'src/payments/payments.entity';
 @Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
-  @Column({ type: 'decimal', default: 0})
-  general_discount: number;
+  @Column({ type: 'decimal', default: 0 })
+  general_discount!: number;
 
-  @Column({ type: 'decimal', default: 0})
-  general_surcharge: number;
+  @Column({ type: 'decimal', default: 0 })
+  general_surcharge!: number;
 
   @Column({ type: 'decimal' })
-  total: number;
+  total!: number;
 
   @Column()
-  status: string;
+  status!: string;
 
   @Column()
-  is_draft: boolean;
+  is_draft!: boolean;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
   // Relaciones
   @ManyToOne(() => User, (user) => user.orders, { onDelete: 'CASCADE' })
-  user: User;
+  user!: User;
 
   @OneToMany(() => OrderItem, (item) => item.order, { cascade: true })
-  order_items: OrderItem[];
+  order_items!: OrderItem[];
 
-  @ManyToOne(() => Client, (client) => client.orders, { nullable: true})
-  client: Client;
+  @ManyToOne(() => Client, (client) => client.orders, { nullable: true })
+  client!: Client | null;
 
   @OneToMany(() => Payment, (payment) => payment.order)
-  payments: Payment[];
+  payments!: Payment[];
 }

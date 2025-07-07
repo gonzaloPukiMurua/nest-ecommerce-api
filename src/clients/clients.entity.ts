@@ -16,40 +16,39 @@ import { Payment } from 'src/payments/payments.entity';
 @Entity('clients')
 export class Client {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column({ nullable: true })
-  document_number: string; // DNI, CUIT, etc.
+  document_number!: string | null;
 
   @Column({ nullable: true })
-  tax_status: string; // Ej: Responsable Inscripto, Monotributo, etc.
+  tax_status!: string | null;
 
   @Column({ nullable: true })
-  email: string;
+  email!: string | null;
 
   @Column({ nullable: true })
-  phone: string;
+  phone!: string | null;
 
   @Column({ default: true })
-  active: boolean;
+  active!: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at!: Date;
 
-  // Relación con ordenes de compra (si se registra por cliente)
   @OneToMany(() => Order, (order) => order.client)
-  orders: Order[];
+  orders!: Order[];
 
-  @OneToOne(() => Address, { cascade: true, nullable: true})
+  @OneToOne(() => Address, { cascade: true, nullable: true })
   @JoinColumn()
-  address: Address;
+  address!: Address | null;
 
   @OneToMany(() => Payment, (payment) => payment.client)
-  payments: Payment[];
+  payments!: Payment[];
 }
