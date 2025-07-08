@@ -19,7 +19,7 @@ export class Category {
   name!: string;
 
   @Column({ nullable: true })
-  description!: string | null;
+  description?: string;
 
   @Column({ default: true })
   active!: boolean;

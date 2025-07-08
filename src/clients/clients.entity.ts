@@ -22,16 +22,16 @@ export class Client {
   name!: string;
 
   @Column({ nullable: true })
-  document_number!: string | null;
+  document_number?: string;
 
   @Column({ nullable: true })
-  tax_status!: string | null;
+  tax_status?: string;
 
   @Column({ nullable: true })
-  email!: string | null;
+  email?: string;
 
   @Column({ nullable: true })
-  phone!: string | null;
+  phone?: string;
 
   @Column({ default: true })
   active!: boolean;
@@ -47,7 +47,7 @@ export class Client {
 
   @OneToOne(() => Address, { cascade: true, nullable: true })
   @JoinColumn()
-  address!: Address | null;
+  address?: Address;
 
   @OneToMany(() => Payment, (payment) => payment.client)
   payments!: Payment[];

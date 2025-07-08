@@ -28,7 +28,7 @@ export class Payment {
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'client_id' })
-  client!: Client | null;
+  client?: Client;
 
   @Column({
     type: 'enum',
@@ -46,11 +46,11 @@ export class Payment {
   })
   status!: PaymentStatus;
 
-  @Column({ nullable: true })
-  transaction_reference!: string | null;
+  @Column({ type: 'json', nullable: true })
+  transaction_reference?: any;
 
   @Column({ type: 'timestamp', nullable: true })
-  paid_at!: Date | null;
+  paid_at?: Date;
 
   @CreateDateColumn()
   created_at!: Date;
